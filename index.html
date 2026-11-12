@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mau &amp; Ali · Nos casamos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bordo:#6b1f2a; --bordo-2:#54141d; --marfil:#f6f1e7; --marfil-2:#efe7d6;
+    --oro:#b08d57; --tinta:#2c2420; --suave:#7a6f66;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Montserrat', Arial, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
+  html, body{width:100%; max-width:100%;}
+  body{overflow-x:hidden; position:relative;}
+  img, video{max-width:100%;}
+  body{font-family:var(--sans); color:var(--tinta); background:var(--marfil); line-height:1.6;}
+  h1,h2,h3{font-family:var(--serif); font-weight:500; line-height:1.1;}
+  .wrap{max-width:720px; margin:0 auto; padding:0 24px;}
+  section{padding:64px 0;}
+  .eyebrow{font-family:var(--sans); font-size:11px; letter-spacing:.35em; text-transform:uppercase; color:var(--oro);}
+
+  /* HERO */
+  .hero{min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:flex-end;
+        text-align:center; color:#fff; position:relative; padding:40px 24px 44px;
+        background:
+          linear-gradient(to bottom, rgba(42,12,16,.10) 0%, rgba(42,12,16,.25) 38%, rgba(42,12,16,.82) 62%, rgba(42,12,16,.95) 100%),
+          url('portada.jpg') 39% 22% / cover no-repeat, #4a1721;}
+  .hero h1, .hero .date, .count b{text-shadow:0 2px 14px rgba(0,0,0,.35);}
+  @media(min-width:900px){ .hero{background-position:center, 50% 30%;} }
+  .hero .ph-hero{position:absolute; inset:0; display:flex; align-items:flex-end; justify-content:center;
+        padding-bottom:18px; color:rgba(255,255,255,.22); font-family:var(--sans); font-size:11px; letter-spacing:.18em;
+        text-transform:uppercase; border:0; z-index:0;}
+  .hero > *{position:relative; z-index:1;}
+  .hero .eyebrow{color:#e9cfa6;}
+  .hero h1{font-size:clamp(52px,16vw,96px); color:#fff; margin:14px 0 6px; font-weight:400;}
+  .hero .amp{font-style:italic; color:#e9cfa6;}
+  .hero .date{font-family:var(--sans); letter-spacing:.3em; text-transform:uppercase; font-size:13px; margin-top:10px;}
+  .hero .clima{font-size:11px; color:rgba(255,255,255,.65); margin-top:8px; letter-spacing:.05em;}
+  .scroll{margin-top:40px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.7);}
+
+  /* COUNTDOWN */
+  .count{display:flex; gap:22px; justify-content:center; margin-top:28px;}
+  .count div{min-width:58px;}
+  .count b{display:block; font-family:var(--serif); font-size:34px; color:#fff;}
+  .count span{font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#e9cfa6;}
+
+  /* SECCIONES */
+  .center{text-align:center;}
+  h2.title{font-size:34px; color:var(--bordo); margin-bottom:6px;}
+  .divider{width:54px; height:1px; background:var(--oro); margin:14px auto 0;}
+  .lead{color:var(--suave); font-weight:300; max-width:540px; margin:16px auto 0; font-size:15.5px;}
+
+  .events{display:grid; gap:22px; margin-top:36px;}
+  .card{background:#fff; border:1px solid var(--marfil-2); border-radius:12px; padding:28px 26px; text-align:center;
+        box-shadow:0 10px 30px rgba(80,40,30,.05);}
+  .card .k{font-size:11px; letter-spacing:.25em; text-transform:uppercase; color:var(--oro);}
+  .card h3{font-size:26px; color:var(--bordo); margin:8px 0 2px;}
+  .card .fecha{font-family:var(--sans); font-size:14px; color:var(--tinta); letter-spacing:.04em;}
+  .card .lugar{color:var(--suave); font-size:14px; margin-top:10px;}
+  .card a.map{display:inline-block; margin-top:14px; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+        color:var(--bordo); text-decoration:none; border:1px solid var(--bordo); border-radius:30px; padding:8px 20px;}
+
+  /* DRESS */
+  .dress{background:var(--bordo); color:#fff; text-align:center;}
+  .dress h2{color:#fff;} .dress .divider{background:#e9cfa6;}
+  .dress .lead{color:rgba(255,255,255,.8);}
+  .dots{display:flex; gap:14px; justify-content:center; margin-top:22px;}
+  .dot{width:34px; height:34px; border-radius:50%; border:1px solid rgba(255,255,255,.4);}
+  .dot.blanco{background:#fff;} .dot.marfil{background:#f3ead5;} .dot.bordo{background:#8c2b38;}
+  .reserva{font-size:12.5px; color:rgba(255,255,255,.7); margin-top:16px;}
+
+  /* NIÑOS (variante) */
+  /* INTRO con video */
+  body.locked{overflow:hidden;}
+  #intro{position:fixed; inset:0; z-index:100; background:radial-gradient(circle at 50% 40%, #5a1a24, #2a0c10 70%);
+         display:flex; align-items:center; justify-content:center; text-align:center; color:#fff;
+         transition:opacity .9s ease; cursor:pointer;}
+  #intro.hide{opacity:0; pointer-events:none;}
+  #intro .cover{padding:24px;}
+  #intro .names{font-family:var(--serif); font-size:clamp(46px,14vw,80px); line-height:1; margin-top:12px;}
+  #intro .names i{color:#e9cfa6;}
+  #intro .sello{width:92px; height:92px; border-radius:50%; margin:34px auto 30px; display:flex; align-items:center;
+         justify-content:center; background:var(--bordo); border:1px solid #e9cfa6; box-shadow:0 0 0 6px rgba(233,207,166,.12);
+         font-family:var(--serif); font-size:28px; color:#e9cfa6; font-style:italic;}
+  #intro .tap{font-family:var(--sans); font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:#e9cfa6;
+         background:none; border:0; animation:pulse 2.2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.45;} 50%{opacity:1;}}
+  #intro video{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; background:#000; display:none;}
+  #intro.playing{cursor:default;}
+  #intro.playing video{display:block;}
+  #intro.playing .cover{display:none;}
+  #saltar{position:absolute; top:18px; right:16px; z-index:2; display:none; background:rgba(0,0,0,.35); color:#fff;
+         border:1px solid rgba(255,255,255,.4); border-radius:20px; padding:7px 14px; font-family:var(--sans);
+         font-size:11px; letter-spacing:.12em; text-transform:uppercase; cursor:pointer;}
+  #intro.playing #saltar{display:block;}
+
+  /* RSVP */
+  .rsvp{text-align:center; background:var(--marfil-2);}
+  .form{display:none; max-width:420px; margin:28px auto 0; text-align:left; background:#fff;
+        border:1px solid #e6dcc7; border-radius:14px; padding:26px 22px;}
+  .form.open{display:block; animation:fade .5s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+  .form label{display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--suave); margin:14px 0 6px;}
+  .form label:first-child{margin-top:0;}
+  .form input, .form select{width:100%; font-family:var(--sans); font-size:16px; color:var(--tinta);
+        padding:12px 14px; border:1px solid #d9ccb3; border-radius:8px; background:var(--marfil);}
+  .form input:focus, .form select:focus{outline:none; border-color:var(--bordo);}
+  .form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .form .grupo-t{font-family:var(--serif); font-size:20px; color:var(--bordo); margin:20px 0 0;}
+  .form .btn{display:block; width:100%; margin-top:22px; border:0; cursor:pointer; font-family:var(--sans);}
+  .err{color:#a33; font-size:13px; margin-top:10px; min-height:18px; text-align:center;}
+  .ninos-box{background:#fff; border:1px solid var(--marfil-2); border-radius:12px; padding:30px; text-align:center; margin-top:10px;}
+  .ninos-box .heart{color:var(--bordo); font-size:22px;}
+  .ninos-box p{color:var(--suave); font-style:italic; font-family:var(--serif); font-size:20px; margin-top:8px;}
+
+  /* REGALOS */
+  .regalos{text-align:center;}
+  .regalos .lead{font-style:italic; font-family:var(--serif); font-size:19px; color:var(--tinta);}
+  .btn{display:inline-block; margin-top:24px; background:var(--bordo); color:#fff; text-decoration:none;
+       font-size:13px; letter-spacing:.12em; text-transform:uppercase; padding:15px 34px; border-radius:40px;
+       transition:background .2s;}
+  .btn:hover{background:var(--bordo-2);}
+
+  /* GALERIA placeholders */
+  .galeria{display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:34px;}
+  .galeria img{display:block; width:100%; aspect-ratio:3/4; object-fit:cover; border-radius:10px;
+      box-shadow:0 8px 22px rgba(80,40,30,.10);}
+  .ph{aspect-ratio:3/4; background:var(--marfil-2); border:1px dashed #cbb99a; border-radius:10px;
+      display:flex; align-items:center; justify-content:center; color:#a9906c; font-size:11px;
+      letter-spacing:.1em; text-transform:uppercase; text-align:center; padding:8px;}
+
+  /* FOOTER */
+  footer{background:var(--bordo-2); color:rgba(255,255,255,.8); text-align:center; padding:40px 24px;}
+  footer .names{font-family:var(--serif); font-size:30px; color:#fff;}
+  footer .amp{font-style:italic; color:#e9cfa6;}
+
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media(max-width:560px){ .count{gap:14px;} }
+</style>
+</head>
+<body class="locked">
+
+  <!-- INTRO: portada + video (archivo "intro.mp4" en la misma carpeta) -->
+  <div id="intro">
+    <div class="cover">
+      <div class="eyebrow" style="color:#e9cfa6;">Estás invitado</div>
+      <div class="names">Mau <i>&amp;</i> Ali</div>
+      <div class="sello">M&amp;A</div>
+      <button class="tap" type="button">Tocá para abrir la invitación</button>
+    </div>
+    <video id="vid" src="intro.mp4" playsinline preload="auto"></video>
+    <button id="saltar" type="button">Saltar ›</button>
+  </div>
+
+  <header class="hero">
+    <div class="eyebrow">Nos casamos</div>
+    <h1>Mau <span class="amp">&amp;</span> Ali</h1>
+    <div class="date">9 de Enero, 2027</div>
+    <div class="clima">· fecha sujeta a confirmación por clima ·</div>
+    <div class="count" id="count">
+      <div><b id="d">–</b><span>días</span></div>
+      <div><b id="h">–</b><span>hs</span></div>
+      <div><b id="m">–</b><span>min</span></div>
+      <div><b id="s">–</b><span>seg</span></div>
+    </div>
+    <div class="scroll">↓ Deslizá ↓</div>
+  </header>
+
+  <section class="center reveal">
+    <div class="wrap">
+      <h2 class="title">Nuestros momentos</h2>
+      <div class="divider"></div>
+      <p class="lead">Nos encantaría compartir con vos estos días tan especiales.</p>
+      <div class="events">
+        <div class="card">
+          <div class="k">Civil</div>
+          <h3>Jueves 7 de Enero</h3>
+          <div class="fecha">Horario a confirmar</div>
+          <div class="lugar">Lino Lagos 1702, Aldo Bonzi</div>
+          <a class="map" href="https://www.google.com/maps/search/?api=1&query=Lino+Lagos+1702+Aldo+Bonzi" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+        <div class="card">
+          <div class="k">Fiesta de boda</div>
+          <h3>Sábado 9 de Enero</h3>
+          <div class="fecha">16:00 hs (aprox.)</div>
+          <div class="lugar">Quinta La Soñada · Estancia Cañuelas Sur</div>
+          <a class="map" href="https://www.google.com/maps/search/?api=1&query=V798%2B46+Estancia+Ca%C3%B1uelas+Sur" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dress reveal">
+    <div class="wrap">
+      <div class="eyebrow" style="color:#e9cfa6;">Código de vestimenta</div>
+      <h2 class="title" style="margin-top:8px;">Formal</h2>
+      <div class="divider"></div>
+      <div class="dots">
+        <div class="dot blanco"></div><div class="dot marfil"></div><div class="dot bordo"></div>
+      </div>
+      <p class="reserva">Reservamos los colores blanco, marfil y bordó para la novia, el novio, las damas de honor y los padrinos.</p>
+    </div>
+  </section>
+
+  <!--NINOS_START-->
+  <section id="ninos" class="center reveal">
+    <div class="wrap">
+      <h2 class="title">Una aclaración con cariño</h2>
+      <div class="divider"></div>
+      <div class="ninos-box">
+        <div class="heart">&#9825;</div>
+        <p>&ldquo;Aunque amamos a los más pequeños, este evento será solo para adultos.&rdquo;</p>
+      </div>
+    </div>
+  </section>
+  <!--NINOS_END-->
+
+  <section class="regalos reveal">
+    <div class="wrap">
+      <h2 class="title">Regalos</h2>
+      <div class="divider"></div>
+      <p class="lead">Nuestro regalo más grande es tu presencia. Pero si deseás tener un detalle con nosotros, te damos esta opción.</p>
+      <a class="btn" href="https://mpago.la/2Unjyke" id="pago" target="_blank" rel="noopener">Regalá con un click</a>
+    </div>
+  </section>
+
+  <section class="center reveal" style="padding-top:0;">
+    <div class="wrap">
+      <h2 class="title">Nosotros</h2>
+      <div class="divider"></div>
+      <div class="galeria">
+        <img src="foto1.jpg" alt="Mau y Ali" loading="lazy" style="object-position:42% 50%;">
+        <img src="foto2.jpg" alt="Mau y Ali" loading="lazy" style="object-position:50% 50%;">
+        <img src="foto3.jpg" alt="Mau y Ali" loading="lazy" style="object-position:4% 50%;">
+        <img src="foto4.jpg" alt="Mau y Ali" loading="lazy" style="object-position:50% 50%;">
+      </div>
+    </div>
+  </section>
+
+  <section class="rsvp reveal">
+    <div class="wrap">
+      <h2 class="title">¿Venís?</h2>
+      <div class="divider"></div>
+      <p class="lead">Nos ayuda muchísimo que nos confirmes tu asistencia.</p>
+      <button class="btn" id="abrir" type="button" style="border:0; cursor:pointer; font-family:var(--sans);">Confirmá tu asistencia</button>
+      <!--FORM_START-->
+      <div class="form" id="form">
+        <label for="nombre">Nombre completo</label>
+        <input id="nombre" type="text" placeholder="Nombre y apellido" autocomplete="name">
+        <button class="btn" id="enviar" type="button">Confirmar</button>
+        <p class="err" id="err"></p>
+      </div>
+      <!--FORM_END-->
+    </div>
+  </section>
+
+  <footer>
+    <div class="names">Mau <span class="amp">&amp;</span> Ali</div>
+    <div style="font-size:12px; letter-spacing:.2em; text-transform:uppercase; margin-top:8px;">9 · 1 · 2027</div>
+  </footer>
+
+<script>
+  // ==== INTRO: tocar → video → al terminar entra a la invitación ====
+  (function(){
+    var intro = document.getElementById('intro'), vid = document.getElementById('vid');
+    var sinVideo = false, listo = false;
+    function entrar(){
+      if (listo) return; listo = true;
+      try { vid.pause(); } catch(e){}
+      intro.classList.add('hide');
+      document.body.classList.remove('locked');
+      window.scrollTo(0,0);
+      setTimeout(function(){ intro.remove(); }, 1000);
+    }
+    vid.addEventListener('error', function(){ sinVideo = true; if (intro.classList.contains('playing')) entrar(); });
+    vid.addEventListener('ended', entrar);
+    document.getElementById('saltar').addEventListener('click', function(e){ e.stopPropagation(); entrar(); });
+    intro.addEventListener('click', function(){
+      if (intro.classList.contains('playing')) return;
+      if (sinVideo) { entrar(); return; }
+      intro.classList.add('playing');
+      var p = vid.play();
+      if (p && p.catch) p.catch(entrar);
+    });
+  })();
+
+  // ==== CONFIGURACIÓN: número de WhatsApp que recibe las confirmaciones ====
+  // Formato internacional sin "+" ni espacios. Ej: 5491123456789
+  var WHATSAPP = "5491159537435";
+
+  function abrirWhatsApp(msg){
+    var base = WHATSAPP ? "https://wa.me/" + WHATSAPP : "https://wa.me/";
+    location.href = base + "?text=" + encodeURIComponent(msg);
+  }
+  function unir(lista){
+    return lista.length > 1 ? lista.slice(0,-1).join(", ") + " y " + lista[lista.length-1] : lista[0];
+  }
+  document.getElementById('abrir').addEventListener('click', function(){
+    var f = document.getElementById('form');
+    f.classList.add('open');
+    f.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+  document.getElementById('form').addEventListener('input', function(){
+    document.getElementById('err').textContent = "";
+  });
+  //JS_FORM_START
+  document.getElementById('enviar').addEventListener('click', function(){
+    var n = document.getElementById('nombre').value.trim();
+    var err = document.getElementById('err');
+    if (!n){ err.textContent = "Escribí tu nombre completo para confirmar."; return; }
+    err.textContent = "";
+    abrirWhatsApp("Yo, " + n + ", acepto la invitación a este increíble evento y juro solemnemente dar todo de mí para que la pasen increíble y sea de los mejores recuerdos de su vida.");
+  });
+  //JS_FORM_END
+
+  // Countdown a la fiesta
+  var target = new Date('2027-01-09T16:00:00-03:00').getTime();
+  function tick(){
+    var now = Date.now(), diff = target - now;
+    if (diff < 0) diff = 0;
+    var d = Math.floor(diff/86400000);
+    var h = Math.floor(diff%86400000/3600000);
+    var m = Math.floor(diff%3600000/60000);
+    var s = Math.floor(diff%60000/1000);
+    document.getElementById('d').textContent=d;
+    document.getElementById('h').textContent=h;
+    document.getElementById('m').textContent=m;
+    document.getElementById('s').textContent=s;
+  }
+  tick(); setInterval(tick,1000);
+
+  // Fade-in al hacer scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
